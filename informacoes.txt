@@ -1,0 +1,2 @@
+Base criada no Oracle SQL developer
+Bases: ODS311, ODS312, ODS321, ODS322, ODS332, ODS333, ODS334, ODS335
