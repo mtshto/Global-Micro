@@ -6,10 +6,20 @@ async function getIndicadorById(req, res) {
 
   try {
     const indicador = await indicadorRepository.getIndicadorById(indicadorId);
-    res.json(indicador);
+    const formattedIndicador = formatarIndicador(indicador);
+    res.json(formattedIndicador);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao obter indicador.' });
+    res.status(500).json({
+      error: 'Erro ao obter indicador.',
+    });
   }
+}
+
+function formatarIndicador(indicador) {
+  // Implemente a lógica para formatar o indicador conforme o novo formato
+  // ...
+
+  return formattedIndicador;
 }
 
 module.exports = {

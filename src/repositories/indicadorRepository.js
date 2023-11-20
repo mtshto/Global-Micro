@@ -1,8 +1,17 @@
 // repositories/indicadorRepository.js
-const db = require('../util/db');
+const Indicador = require('../models/indicadorModel');
 
-function getIndicadorById(id) {
-  // Implemente a lógica para obter o indicador pelo ID do banco de dados
+async function getIndicadorById(id) {
+  try {
+    const indicador = await Indicador.findAll({
+      where: {
+        CODIGO: id,
+      },
+    });
+    return indicador;
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = {

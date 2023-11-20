@@ -1,29 +1,63 @@
 // controllers/objetivosController.js
 const objetivoRepository = require('../repositories/objetivoRepository');
 
-async function getObjetivosByTable(req, res) {
-  const tabela = req.params.tabela;
-
+async function getObjetivos(req, res) {
   try {
-    // Verifique se a tabela é válida (para evitar injeção de SQL, por exemplo)
-    const allowedTables = ['ODS311', 'ODS312', 'ODS321', 'ODS322', 'ODS332', 'ODS333', 'ODS334', 'ODS335', 'ODS341', 'ODS342', 'ODS352', 'ODS361', 'ODS372', 'ODS382', 'ODS393'];
+    const objetivos = await objetivoRepository.getObjetivosComIndicadores();
+    console.log('Objetivos do Banco de Dados:', objetivos);
 
-    if (!allowedTables.includes(tabela)) {
-      return res.status(400).json({
-        error: 'Tabela inválida.'
+    // Verificar se há objetivos antes de continuar
+    if (!objetivos || objetivos.length === 0) {
+      return res.status(404).json({
+        error: 'Nenhum objetivo encontrado.',
       });
     }
 
-    // Realize a consulta com base na tabela fornecida
-    const objetivos = await objetivoRepository.getObjetivosByTable(tabela);
-    res.json(objetivos);
+    // Criar um objeto para armazenar os dados formatados
+    const formattedData = {
+      id: objetivos[0].ID, // Supondo que o ID é o mesmo para todos os objetivos
+      objetivos: {},
+      global: objetivos[0].OBJETIVOS_GLOBAL,
+      brasil: objetivos[0].OBJETIVOS_BRASIL,
+      indicadores: [],
+    };
+
+    // Preencher o objeto de objetivos
+    for (const objetivo of objetivos) {
+      formattedData.objetivos[objetivo.ID] = {
+        id: objetivo.ID,
+        descricao: objetivo.DESCRICAO,
+        // Adicione mais campos conforme necessário
+      };
+    }
+
+    // Preencher o array de indicadores
+    for (const indicador of objetivos) {
+      formattedData.indicadores.push({
+        id: indicador.CODIGO_INDICADOR,
+        descricao: indicador.DESCRICAO,
+        // Adicione mais campos conforme necessário
+      });
+    }
+
+    // Usar JSON.stringify com um replacer para evitar referências circulares
+    const jsonString = JSON.stringify(formattedData, (key, value) => {
+      if (typeof value === 'function') {
+        return value.toString();
+      }
+      return value;
+    });
+
+    // Enviar a resposta
+    res.json(JSON.parse(jsonString));
   } catch (error) {
+    console.error('Erro ao obter dados:', error);
     res.status(500).json({
-      error: 'Erro ao obter objetivos.'
+      error: 'Erro ao obter dados.',
     });
   }
 }
 
 module.exports = {
-  getObjetivosByTable,
+  getObjetivos,
 };

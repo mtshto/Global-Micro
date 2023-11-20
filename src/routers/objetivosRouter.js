@@ -4,7 +4,18 @@ const objetivosController = require('../controllers/objetivosController');
 
 const router = express.Router();
 
-// Rota para obter objetivos com base na tabela fornecida como parâmetro
-router.get('/objetivos/:tabela', objetivosController.getObjetivosByTable);
+// Rota para obter objetivos
+router.get('/objetivos', async (req, res) => {
+  try {
+    const formattedData = await objetivosController.getObjetivos(req, res);
+    
+    res.json(formattedData);
+  } catch (error) {
+    console.error('Erro ao obter dados:', error);
+    return res.status(500).json({
+      error: 'Erro ao obter dados.',
+    });
+  }
+});
 
 module.exports = router;

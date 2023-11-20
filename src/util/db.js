@@ -1,43 +1,38 @@
 // src/utils/db.js
-const oracledb = require('oracledb');
+const { Sequelize } = require('sequelize');
+
+// Configurar a conexão com o banco de dados Oracle
+const sequelize = new Sequelize({
+  dialect: 'oracle',
+  host: 'oracle.fiap.com.br',
+  port: 1521,
+  database: 'orcl',
+  username: 'rm88430',
+  password: '040302',
+});
 
 async function connect() {
   try {
-    const connection = await oracledb.getConnection({
-      user: 'rm88430',
-      password: '040302',
-      connectString: 'oracle.fiap.com.br:1521/orcl',
-    });
-
+    await sequelize.authenticate();
     console.log('Conexão com Oracle SQL bem-sucedida');
-    return connection;
   } catch (error) {
     console.error('Erro ao conectar ao Oracle SQL:', error);
     throw error;
   }
 }
 
-async function execute(query, binds = [], options = {}) {
-  let connection;
+async function execute(query, options = {}) {
   try {
-    connection = await connect();
-    const result = await connection.execute(query, binds, options);
+    const result = await sequelize.query(query, options);
     return result;
   } catch (error) {
     console.error('Erro ao executar a consulta:', error);
     throw error;
-  } finally {
-    if (connection) {
-      try {
-        await connection.close();
-      } catch (err) {
-        console.error('Erro ao fechar a conexão:', err);
-      }
-    }
   }
 }
 
 module.exports = {
+  sequelize,
   connect,
-  execute,
+  execute, // Exportar o método execute
 };

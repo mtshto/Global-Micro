@@ -1,20 +1,20 @@
 // repositories/objetivoRepository.js
 const db = require('../util/db');
 
-async function getObjetivosByTable(tabela) {
-  try {
-    // Utilize o nome da tabela fornecido para a consulta
-    const query = `SELECT * FROM ${tabela}`;
+async function getObjetivosComIndicadores() {
+  const query = `
+  select * from objetivos;
+  `;
 
-    console.log('Query:', query); // Adicione esta linha para ver a consulta gerada
+  const [result] = await db.execute(query, { raw: true });
+  
+  // Flatten the array of arrays to a single array
+  const flattenedResult = result.flatMap(row => row);
 
-    return await db.execute(query);
-  } catch (error) {
-    console.error('Erro ao obter objetivos:', error);
-    throw error;
-  }
+  return flattenedResult;
 }
 
 module.exports = {
-  getObjetivosByTable,
+  getObjetivosComIndicadores,
+  // ... outras funções ...
 };
