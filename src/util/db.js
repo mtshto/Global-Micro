@@ -4,11 +4,11 @@ const { Sequelize } = require('sequelize');
 // Configurar a conexão com o banco de dados Oracle
 const sequelize = new Sequelize({
   dialect: 'oracle',
-  host: 'oracle.fiap.com.br',
-  port: 1521,
-  database: 'orcl',
-  username: 'rm88430',
-  password: '040302',
+  host: process.env.DB_HOST || 'oracle.fiap.com.br',
+  port: process.env.DB_PORT || 1521,
+  database: process.env.DB_NAME || 'orcl',
+  username: process.env.DB_USER || 'rm88430',
+  password: process.env.DB_PASSWORD || '040302',
 });
 
 async function connect() {
