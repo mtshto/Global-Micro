@@ -1,17 +1,16 @@
 // repositories/indicadorRepository.js
-const Indicador = require('../models/indicadorModel');
+const db = require('../util/db');
 
 async function getIndicadorById(id) {
-  try {
-    const indicador = await Indicador.findAll({
-      where: {
-        CODIGO: id,
-      },
-    });
-    return indicador;
-  } catch (error) {
-    throw error;
-  }
+  const query = `
+    SELECT ANO, TAXA
+    FROM indicador
+    WHERE CODIGO = :id;
+  `;
+
+  const [result] = await db.execute(query, { replacements: { id }, raw: true });
+
+  return result;
 }
 
 module.exports = {

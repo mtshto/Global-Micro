@@ -5,7 +5,7 @@ const objetivosController = require('../controllers/objetivosController');
 const router = express.Router();
 
 // Rota para obter objetivos
-router.get('/objetivos', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const formattedData = await objetivosController.getObjetivos(req, res);
     

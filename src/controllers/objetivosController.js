@@ -40,16 +40,8 @@ async function getObjetivos(req, res) {
       });
     }
 
-    // Usar JSON.stringify com um replacer para evitar referências circulares
-    const jsonString = JSON.stringify(formattedData, (key, value) => {
-      if (typeof value === 'function') {
-        return value.toString();
-      }
-      return value;
-    });
-
     // Enviar a resposta
-    res.json(JSON.parse(jsonString));
+    res.json(formattedData);
   } catch (error) {
     console.error('Erro ao obter dados:', error);
     res.status(500).json({

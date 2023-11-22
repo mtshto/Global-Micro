@@ -1,14 +1,9 @@
-// routers/indicadorRouter.js
 const express = require('express');
-const indicadorController = require('../controllers/indicadorController');
+const indicadoresController = require('../controllers/indicadorController'); // Corrigir o nome do controller
 
 const router = express.Router();
 
-console.log('Entrou no indicadorRouter.js');
-
-// Rota para obter indicador por ID
-router.get('/indicador/:id', indicadorController.getIndicadorById);
-
-console.log('Saiu do indicadorRouter.js');
+// Rota para obter um indicador por ID
+router.get('/:id', indicadoresController.getIndicador); // Remover '/indicador' do caminho
 
 module.exports = router;

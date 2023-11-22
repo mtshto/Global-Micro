@@ -1,21 +1,21 @@
-// app.js
 const express = require('express');
 const app = express();
 const db = require('./util/db');
-const { sequelize } = require('./util/db'); // Importe o Sequelize
+const { sequelize } = require('./util/db');
 
 app.use(express.json());
 
 // Registro dos modelos (caso necessário)
-const Objetivos = require('./models/objetivoModel'); // Substitua com o nome correto do seu modelo
-const Indicador = require('./models/indicadorModel'); // Substitua com o nome correto do seu modelo
+const Objetivos = require('./models/objetivoModel');
+const Indicador = require('./models/indicadorModel');
 
 // Rotas
 const objetivosRouter = require('./routers/objetivosRouter');
 const indicadorRouter = require('./routers/indicadorRouter');
 
-app.use(objetivosRouter);
-app.use(indicadorRouter);
+// Use os roteadores diretamente no app
+app.use('/objetivos', objetivosRouter);
+app.use('/indicadores', indicadorRouter);
 
 const PORT = process.env.PORT || 3001;
 

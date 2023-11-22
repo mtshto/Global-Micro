@@ -1,4 +1,3 @@
-// models/indicadorModel.js
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../util/db'); // Importar a instância do Sequelize
 
@@ -13,11 +12,11 @@ const Indicador = sequelize.define('Indicador', {
     allowNull: false,
   },
   TAXA: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.DECIMAL(10, 2), // Usando DECIMAL para representar um número com precisão fixa
     allowNull: false,
   },
   ANO: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 }, {

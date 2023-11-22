@@ -7,11 +7,8 @@ async function getObjetivosComIndicadores() {
   `;
 
   const [result] = await db.execute(query, { raw: true });
-  
-  // Flatten the array of arrays to a single array
-  const flattenedResult = result.flatMap(row => row);
 
-  return flattenedResult;
+  return result;
 }
 
 module.exports = {
