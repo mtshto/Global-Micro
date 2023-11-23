@@ -19,3 +19,15 @@
   - Utilizamos os scripts objetivos.sql e indicadores_v2.sql para a criação das tabelas e inserção dos dados fornecidos.
 
 ## Testes de requisição GET nas bases fornecidas
+### Objetivos
+http://localhost:3001/objetivos/
+![image](https://github.com/mtshto/Global-Micro/assets/82169520/cf01970f-2d64-4a5c-9327-c63b32870e67)
+
+### Indicadores
+http://localhost:3001/indicadores/3.1.1 - Observação: Especificar o indicadore desejado.
+![image](https://github.com/mtshto/Global-Micro/assets/82169520/d41d52f9-5072-4544-adc1-fabc9b6a2757)
+![image](https://github.com/mtshto/Global-Micro/assets/82169520/2ae89c13-abc1-4b5b-8983-41d96bbc67e7)
+
+
+
+
