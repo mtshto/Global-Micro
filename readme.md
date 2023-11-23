@@ -14,4 +14,8 @@
 
   ![image](https://github.com/mtshto/Global-Micro/assets/62342894/bf16d850-78fd-44ec-ae03-9d031cf1eb6b)
 
+  ## Script SQL
+
+  - Utilizamos os scripts objetivos.sql e indicadores_v2.sql para a criação das tabelas e inserção dos dados fornecidos.
+
 ## Testes de requisição GET nas bases fornecidas
