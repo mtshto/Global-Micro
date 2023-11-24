@@ -4,9 +4,13 @@
 - Vitor Torres Dantas RM: 88415
   
 ## Construção da imagem docker
-
+Rodar os comandos nessa ordem:
 - docker build -t app-node -f src/Dockerfile .
-- rodar o don - docker run -p 3001:3001 -e DB_HOST=oracle.fiap.com.br -e DB_PORT=1521 -e DB_NAME=orcl -e DB_USER=rm88430 -e DB_PASSWORD=040302 app-node
+- cd .\src\
+- docker run -p 3001:3001 -e DB_HOST=oracle.fiap.com.br -e DB_PORT=1521 -e DB_NAME=orcl -e DB_USER=rm88430 -e DB_PASSWORD=040302 app-node
+- ![image](https://github.com/mtshto/Global-Micro/assets/82169520/9e59630f-87a0-441b-b045-70dd968dfc32)
+- ![image](https://github.com/mtshto/Global-Micro/assets/82169520/0218196a-3e74-436a-b20d-c9301de411c1)
+
 
 ## MODELO RELACIONAL
 
